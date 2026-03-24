@@ -11,10 +11,6 @@ function App() {
   const [scrollOffset, setScrollOffset] = useState(0)
   const scrollSceneRef = useRef(null)
   const trackRef = useRef(null)
-  const snapTimeoutRef = useRef(null)
-  const unlockTimeoutRef = useRef(null)
-  const snapPointsRef = useRef([])
-  const isAutoSnappingRef = useRef(false)
 
   const openModal = (type) => setActiveModal(type)
   const closeModal = () => setActiveModal(null)
@@ -36,50 +32,14 @@ function App() {
       setScrollOffset(nextOffset)
     }
 
-    const snapToNearestSection = () => {
-      const rawOffset = window.scrollY - scene.offsetTop
-      const currentOffset = Math.max(0, Math.min(rawOffset, maxOffset))
-      const snapPoints = snapPointsRef.current
-
-      if (!snapPoints.length) return
-
-      const nearestPoint = snapPoints.reduce((closestPoint, point) => {
-        return Math.abs(point - currentOffset) < Math.abs(closestPoint - currentOffset)
-          ? point
-          : closestPoint
-      }, snapPoints[0])
-
-      if (Math.abs(nearestPoint - currentOffset) < 12) return
-
-      isAutoSnappingRef.current = true
-      window.scrollTo({
-        top: scene.offsetTop + nearestPoint,
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      })
-
-      window.clearTimeout(unlockTimeoutRef.current)
-      unlockTimeoutRef.current = window.setTimeout(() => {
-        isAutoSnappingRef.current = false
-      }, 500)
-    }
-
     const requestScrollUpdate = () => {
       if (!frameId) {
         frameId = window.requestAnimationFrame(updateScrollState)
-      }
-
-      window.clearTimeout(snapTimeoutRef.current)
-
-      if (!isAutoSnappingRef.current) {
-        snapTimeoutRef.current = window.setTimeout(snapToNearestSection, 140)
       }
     }
 
     const syncSceneHeight = () => {
       maxOffset = Math.max(track.scrollWidth - window.innerWidth, 0)
-      const panels = Array.from(track.children)
-      const sectionPoints = panels.slice(0, -1).map((panel) => Math.min(panel.offsetLeft, maxOffset))
-      snapPointsRef.current = [...new Set([...sectionPoints, maxOffset])]
       scene.style.height = `${window.innerHeight + maxOffset}px`
       updateScrollState()
     }
@@ -95,9 +55,6 @@ function App() {
       if (frameId) {
         window.cancelAnimationFrame(frameId)
       }
-
-      window.clearTimeout(snapTimeoutRef.current)
-      window.clearTimeout(unlockTimeoutRef.current)
     }
   }, [])
 
