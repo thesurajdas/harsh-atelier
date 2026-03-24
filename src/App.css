@@ -16,6 +16,7 @@
   width: max-content;
   height: 100%;
   will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 ::-webkit-scrollbar {
@@ -45,9 +46,13 @@
 }
 
 .image-wrapper {
+  min-width: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Landing Section Specifics */
@@ -58,6 +63,13 @@
   align-items: center;
   text-align: center;
   padding: 2rem;
+}
+
+.home-logo {
+  width: min(370px, 72vw);
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 .title-large {
@@ -88,9 +100,18 @@
   display: block;
 }
 
+.section:not(.landing):not(.footer) .image-wrapper {
+  padding: clamp(1rem, 2vw, 2rem) clamp(1rem, 2vw, 2rem) clamp(1rem, 2.5vw, 2.5rem) 0;
+}
+
+.section:not(.landing):not(.footer) .section-image {
+  border-radius: 24px;
+}
+
 .section-image.services-image {
   object-fit: contain;
-  object-position: top center;
+  object-position: center;
+  max-height: 82vh;
 }
 
 /* Services Layout */
@@ -200,7 +221,7 @@
 
   .image-wrapper {
     height: auto;
-    min-height: 20vh;
+    min-height: 28vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -209,9 +230,9 @@
 
   .section-image {
     width: 100%;
-    height: auto;
-    max-height: 50vh;
-    object-fit: contain;
+    height: 100%;
+    max-height: 52vh;
+    object-fit: cover;
   }
   .section.landing{
     background: #FAFAFA;
@@ -293,6 +314,7 @@
     margin-top: 0;
     width: calc(100% + 6%);
     height: auto;             /* let flex handle height */
+    padding: 0;
   }
 
   .atelier .section-image {
@@ -376,6 +398,10 @@
   .section.footer {
     width: 56vw;
     min-width: 220px;
+  }
+
+  .section:not(.landing):not(.footer) .image-wrapper {
+    padding: 0;
   }
 
   .footer-drawer-content {
