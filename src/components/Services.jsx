@@ -8,14 +8,14 @@ const Services = ({ onBrandingClick, onMarketingClick }) => {
         <div className="service-item">
           <h3>Branding</h3>
           <p className="description">
-            Design focuses on shaping the identity and visual presence of a fashion brand. From brand strategy to visual identity and website design, the goal is to create a clear and recognizable brand.
+            Design focuses on shaping the identity and visual presence of a fashion brand. From brand strategy to visual identity and website design, the goal is to create a clear and recognizable brand{" "}
             <span className="see-more" onClick={onBrandingClick}> See more</span>
           </p>
         </div>
         <div className="service-item">
           <h3>Marketing</h3>
           <p className="description">
-            Digital marketing focused on expanding your brand, reaching the right audience, and driving real sales through strategic campaigns and performance-driven growth.
+            Digital marketing focused on expanding your brand, reaching the right audience, and driving real sales through strategic campaigns and performance-driven growth{" "}
             <span className="see-more" onClick={onMarketingClick}> See more</span>
           </p>
         </div>

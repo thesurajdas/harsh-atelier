@@ -2,7 +2,7 @@ import purposeStairs from '../assets/purpose.png'
 
 const Purpose = () => {
   return (
-    <section className="section">
+    <section className="section purpose">
       <div className="text-content">
         <h1 className="title-large">Purpose</h1>
         <p className="description">
