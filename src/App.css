@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: var(--viewport-height);
   overflow: hidden;
 }
 
@@ -27,7 +27,7 @@
   position: relative;
   flex-shrink: 0;
   width: 200vw;
-  height: 100vh;
+  height: var(--viewport-height);
   overflow: hidden;
   background-color: var(--bg-color);
   border-right: 1px solid #b7b7b7;
@@ -109,7 +109,7 @@
 
 .section-image {
   width: auto;
-  height: min(112vh, 1180px);
+  height: min(calc(var(--viewport-height) * 1.12), 1180px);
   max-width: min(120vw, 1480px);
   object-fit: contain;
   object-position: bottom right;
@@ -117,7 +117,7 @@
 }
 
 .section-image.services-image {
-  height: min(88vh, 920px);
+  height: min(calc(var(--viewport-height) * 0.88), 920px);
   max-width: min(74vw, 860px);
   object-position: center;
 }
@@ -324,7 +324,7 @@
 
   .section.purpose .image-wrapper,
   .section.services .image-wrapper {
-    min-height: 82vh;
+    min-height: calc(var(--viewport-height) * 0.82);
     margin-top: 2rem;
     align-items: flex-end;
   }
@@ -332,7 +332,7 @@
   .section.atelier,
   .section.purpose {
     height: auto;
-    min-height: 100vh;
+    min-height: var(--viewport-height);
   }
 
   .section.atelier .image-wrapper,
@@ -353,7 +353,7 @@
 
   .section.services {
     width: 100vw;
-    height: 100vh;
+    height: var(--viewport-height);
     overflow: hidden;
   }
 
@@ -390,7 +390,7 @@
 
   .section.services .image-wrapper {
     width: 100vw;
-    min-height: 50vh;
+    min-height: calc(var(--viewport-height) * 0.5);
     margin-top: auto;
     justify-content: center;
     align-items: flex-end;
@@ -410,7 +410,7 @@
     min-width: 112vw;
     max-width: 112vw;
     height: auto;
-    max-height: 54vh;
+    max-height: calc(var(--viewport-height) * 0.54);
     object-fit: contain;
     object-position: center bottom;
   }
@@ -470,7 +470,7 @@
 
   .section.services {
     width: 100vw;
-    height: 100vh;
+    height: var(--viewport-height);
   }
 
   .section.services .services-content {
@@ -501,7 +501,7 @@
 
   .section.services .image-wrapper {
     width: 100vw;
-    min-height: 46vh;
+    min-height: calc(var(--viewport-height) * 0.46);
     margin-top: auto;
   }
 
@@ -509,11 +509,11 @@
     width: 118vw;
     min-width: 118vw;
     max-width: 118vw;
-    max-height: 50vh;
+    max-height: calc(var(--viewport-height) * 0.5);
   }
 
   .section.purpose .image-wrapper {
-    min-height: 76vh;
+    min-height: calc(var(--viewport-height) * 0.76);
     margin-top: 1.5rem;
   }
 

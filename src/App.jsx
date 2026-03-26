@@ -18,11 +18,14 @@ function App() {
   useEffect(() => {
     const scene = scrollSceneRef.current
     const track = trackRef.current
+    const visualViewport = window.visualViewport
 
     if (!scene || !track) return
 
     let frameId = 0
     let maxOffset = 0
+
+    const getViewportHeight = () => visualViewport?.height ?? window.innerHeight
 
     const updateScrollState = () => {
       frameId = 0
@@ -40,17 +43,21 @@ function App() {
 
     const syncSceneHeight = () => {
       maxOffset = Math.max(track.scrollWidth - window.innerWidth, 0)
-      scene.style.height = `${window.innerHeight + maxOffset}px`
+      scene.style.height = `${getViewportHeight() + maxOffset}px`
       updateScrollState()
     }
 
     syncSceneHeight()
     window.addEventListener('resize', syncSceneHeight)
     window.addEventListener('scroll', requestScrollUpdate, { passive: true })
+    visualViewport?.addEventListener('resize', syncSceneHeight)
+    visualViewport?.addEventListener('scroll', syncSceneHeight)
 
     return () => {
       window.removeEventListener('resize', syncSceneHeight)
       window.removeEventListener('scroll', requestScrollUpdate)
+      visualViewport?.removeEventListener('resize', syncSceneHeight)
+      visualViewport?.removeEventListener('scroll', syncSceneHeight)
 
       if (frameId) {
         window.cancelAnimationFrame(frameId)
